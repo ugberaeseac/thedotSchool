@@ -1,0 +1,108 @@
+/* -------------------------
+   Base Styles
+-------------------------- */
+body {
+    background-color: #f5f7fb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+}
+
+/* -------------------------
+   Navbar
+-------------------------- */
+.navbar {
+    padding: 0.8rem 1.2rem;
+}
+
+.btn-bgcolor {
+    background-color: #2b3035;
+    border: none;
+    padding: 10px 20px;
+}
+
+/* -------------------------
+   Payment Card
+-------------------------- */
+.payment-card {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.payment-card legend {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* -------------------------
+   Form Controls
+-------------------------- */
+.form-control,
+.form-select {
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #dfe3eb;
+}
+
+/* Medium fields (name, email) */
+input[type="text"],
+input[type="email"] {
+    max-width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Smaller field (phone number) */
+input[type="tel"] {
+    max-width: 70%;
+}
+
+/* Amount field emphasis */
+input[name*="amount"] {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 16px;
+    border: 2px solid #0d6efd;
+}
+
+/* -------------------------
+   Pay Button
+-------------------------- */
+.btn-pay {
+    width: 100%;
+    padding: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 14px;
+}
+
+/* -------------------------
+   Aside Image
+-------------------------- */
+.aside-image {
+    height: 100%;
+    min-height: 560px;
+    border-radius: 22px;
+    overflow: hidden;
+}
+
+.aside-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* -------------------------
+   Responsive
+-------------------------- */
+@media (max-width: 991px) {
+    .aside-image {
+        display: none;
+    }
+
+    .payment-card {
+        padding: 24px;
+    }
+}

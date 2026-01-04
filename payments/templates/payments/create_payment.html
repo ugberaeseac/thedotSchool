@@ -1,0 +1,73 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if title %}
+        <title>The dotSchool - {{ title }}</title>
+    {% else %}
+        <title>The dotSchool Payment Platform</title>
+    {% endif %}
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'payment/css/main.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar btn-bgcolor">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'payment/images/dotschool_logo_black.png' %}"
+                 alt="The dotSchool"
+                 height="48">
+        </a>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row align-items-stretch">
+
+        <!-- Payment Form -->
+        <main class="col-lg-5">
+            <div class="payment-card">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend>Make Payment</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-bgcolor btn-dark btn-pay">
+                            Pay Securely
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Aside Image -->
+        <aside class="col-lg-7 d-none d-lg-block">
+            <div class="aside-image">
+                <img src="{% static 'payment/images/student.jpg' %}">
+            </div>
+        </aside>
+
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
