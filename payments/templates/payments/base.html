@@ -20,7 +20,7 @@
     <link href="{% static 'payment/css/main.css' %}" rel="stylesheet">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <!-- Navbar -->
 <nav class="navbar btn-bgcolor">
@@ -39,32 +39,38 @@
 
         <!-- Payment Form -->
         <main class="col-lg-5">
-            <div class="payment-card">
-                <form method="POST">
-                    {% csrf_token %}
-                    <fieldset>
-                        <legend>Make Payment</legend>
-                        {{ form|crispy }}
-                    </fieldset>
-
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-bgcolor btn-dark btn-pay">
-                            Pay Securely
-                        </button>
-                    </div>
-                </form>
-            </div>
+            {% block main %}
+            {% endblock %}
         </main>
 
         <!-- Aside Image -->
-        <aside class="col-lg-7 d-none d-lg-block">
-            <div class="aside-image">
-                <img src="{% static 'payment/images/student.jpg' %}">
-            </div>
+        
+        <aside class="col-lg-7 mt-2 d-none d-lg-flex align-items-center">
+            {% block aside %}
+            {% endblock %}
         </aside>
+        
 
     </div>
 </div>
+
+<!-- Footer -->
+ {% block footer %}
+{% endblock %}
+
+<script>
+    const steps = document.querySelectorAll('.step');
+    let current = 0;
+
+    function animateSteps() {
+        steps.forEach(step => step.classList.remove('active'));
+        steps[current].classList.add('active');
+        current = (current + 1) % steps.length;
+    }
+
+    animateSteps();
+    setInterval(animateSteps, 2500);
+</script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

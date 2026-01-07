@@ -42,7 +42,8 @@ body {
 .form-select {
     border-radius: 12px;
     padding: 12px 14px;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: 600;
     border: 1px solid #dfe3eb;
 }
 
@@ -79,20 +80,101 @@ input[name*="amount"] {
 }
 
 /* -------------------------
-   Aside Image
+   Aside Image (FULL BLEED)
 -------------------------- */
 .aside-image {
-    height: 100%;
-    min-height: 560px;
-    border-radius: 22px;
+    height: 100vh;              /* Full viewport height */
+    min-height: 100vh;
+    border-radius: 0;           /* REMOVE rounding */
     overflow: hidden;
+    margin: 0;                  /* REMOVE side gaps */
 }
 
 .aside-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
+
+/* Payment steps animation */
+.payment-steps {
+    width: 100%;
+    padding: 60px;
+}
+
+.step {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #9ca3af;
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+}
+
+.step.active {
+    color: #111827;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* -------------------------
+   Footer
+-------------------------- */
+.site-footer {
+    background-color: #2b3035;
+    border-top: 1px solid #e5e7eb;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: auto;
+}
+
+/* -------------------------
+   Success Page Styles
+-------------------------- */
+.success-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #e7f6ec;
+    color: #198754;
+    font-size: 36px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* -------------------------
+   Failed Page Styles
+-------------------------- */
+.failed-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #fdecea;
+    color: #dc3545;
+    font-size: 36px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.payment-card h2 {
+    font-weight: 700;
+}
+
+.payment-card p {
+    line-height: 1.6;
+}
+
 
 /* -------------------------
    Responsive

@@ -1,7 +1,7 @@
 import requests
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.conf import settings
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from .models import Payment, StatusChoice
 from .forms import PaymentForm
@@ -18,7 +18,7 @@ def index(request):
     return redirect('payment-initiate')
 
 
-def initiate(request):
+def initiate(request, name, email):
     if request.method == 'POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
@@ -39,8 +39,9 @@ def initiate(request):
                 return redirect(paystack_response['data']['authorization_url'])
 
     else:
-        form = PaymentForm(initial={'amount': 10000})
-    return render(request, 'payments/create_payment.html', {
+        
+        form = PaymentForm(initial={'full_name': name, 'email': email, 'amount': 10000})
+    return render(request, 'payments/payment.html', {
         'title': 'Payment Platform',
         'form': form,
         'paystack_public_key': os.environ.get('PAYSTACK_PUBLIC_KEY')
@@ -50,9 +51,16 @@ def initiate(request):
 
 def verify(request):
     reference = request.GET.get('reference')
+    if not reference:
+        return redirect('payment-failed')
+
+    payment = Payment.objects.filter(reference=reference).first()
+    if not payment:
+        return redirect('payment failed')
+        
     url = f'https://api.paystack.co/transaction/verify/{reference}'
     headers = {
-        'Authorization': f'Bearer {os.environ.get('PAYSTACK_SECRET_KEY')}'
+        'Authorization': f"Bearer {os.environ.get('PAYSTACK_SECRET_KEY')}"
     }
 
     response = requests.get(url, headers=headers)
@@ -62,6 +70,38 @@ def verify(request):
         payment = Payment.objects.get(reference=reference)
         payment.status = StatusChoice.CONFIRMED
         payment.save()
-        return HttpResponse('Payment Successful')
 
-    return HttpResponse('Payment Failed!')
+        return redirect('payment-success', reference=payment.reference)
+    return redirect('payment-failed', reference=payment.reference)
+
+def success(request, reference):
+    payment = get_object_or_404(
+        Payment,
+        reference=reference,
+        status=StatusChoice.CONFIRMED
+    )
+
+    discord_links = {
+        'Introduction to Software Engineering': 'https://discord.gg/r4qQXvXY',
+        'Frontend Web Development(REACT)': 'https://discord.gg/RZcNcF8Q',
+        'Backend Web Development (Python)': 'https://discord.gg/yrd4NYAD',
+        'Backend Web Development (Node.js)': 'https://discord.gg/sSec7TKZ'
+    }
+
+    discord = discord_links.get(payment.course)
+    if not discord:
+        return redirect('payment-failed')
+
+    return render(request, 'payments/success.html', {'discord': discord})
+
+
+def failed(request, reference):
+    payment = get_object_or_404(
+    Payment,
+    reference=reference,
+    status=StatusChoice.FAILED
+    )
+
+    return render(request, 'payments/failed.html', { 'payment': payment })
+
+
