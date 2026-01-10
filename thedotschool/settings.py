@@ -135,7 +135,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev", "https://*.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev", "https://*.onrender.com"]
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
