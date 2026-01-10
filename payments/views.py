@@ -6,6 +6,7 @@ from django.urls import reverse
 from .models import Payment, StatusChoice
 from .forms import PaymentForm
 from .utils.paystack import initialize_payment
+from .utils.email import send_success_email_with_resend
 from dotenv import load_dotenv
 import os
 import uuid
@@ -15,7 +16,7 @@ load_dotenv()
 
 
 def index(request):
-    return redirect('payment-initiate')
+    return HttpResponse('<h3> Welcome </h3>')
 
 
 def initiate(request, name, email):
@@ -40,7 +41,7 @@ def initiate(request, name, email):
 
     else:
         
-        form = PaymentForm(initial={'full_name': name, 'email': email, 'amount': 10000})
+        form = PaymentForm(initial={'full_name': name, 'email': email, 'amount': 50})
     return render(request, 'payments/payment.html', {
         'title': 'Payment Platform',
         'form': form,
@@ -70,7 +71,7 @@ def verify(request):
         payment = Payment.objects.get(reference=reference)
         payment.status = StatusChoice.CONFIRMED
         payment.save()
-
+        
         return redirect('payment-success', reference=payment.reference)
     return redirect('payment-failed', reference=payment.reference)
 
@@ -91,7 +92,7 @@ def success(request, reference):
     discord = discord_links.get(payment.course)
     if not discord:
         return redirect('payment-failed')
-
+    send_success_email_with_resend(payment, discord)
     return render(request, 'payments/success.html', {'discord': discord})
 
 
