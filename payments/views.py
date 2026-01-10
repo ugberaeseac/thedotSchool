@@ -41,7 +41,7 @@ def initiate(request, name, email):
 
     else:
         
-        form = PaymentForm(initial={'full_name': name, 'email': email, 'amount': 100})
+        form = PaymentForm(initial={'full_name': name, 'email': email, 'amount': 10000})
     return render(request, 'payments/payment.html', {
         'title': 'Payment Platform',
         'form': form,

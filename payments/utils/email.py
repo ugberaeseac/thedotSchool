@@ -24,7 +24,7 @@ def send_success_email_with_resend(payment, discord):
                             <tr>
                                 <td align="center" style="padding-bottom: 20px;">
                     <img 
-                    src="https://i.postimg.cc/BQtMp2K6/dotschool-logo.png" 
+                    src="https://res.cloudinary.com/dfngbmsno/image/upload/v1768043289/dotschool_logo_nthdib.png" 
                             alt="The dotSchool Logo" 
                             style="max-width:120px; width:100%; height:auto;"
                         >
@@ -123,7 +123,7 @@ def send_success_email(payment, discord):
                             <tr>
                                 <td align="center" style="padding-bottom: 20px;">
                     <img 
-                    src="https://i.postimg.cc/BQtMp2K6/dotschool-logo.png" 
+                    src="https://res.cloudinary.com/dfngbmsno/image/upload/v1768043289/dotschool_logo_nthdib.png" 
                             alt="The dotSchool Logo" 
                             style="max-width:120px; width:100%; height:auto;"
                         >
