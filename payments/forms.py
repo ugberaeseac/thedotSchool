@@ -33,6 +33,6 @@ class PaymentForm(forms.ModelForm):
 
     def clean_amount(self):
         amount = self.cleaned_data.get('amount')
-        if amount != 10000:
+        if amount != 100:
             raise forms.ValidationError('Enter the required amount')
         return amount
