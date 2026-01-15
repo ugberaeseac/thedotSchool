@@ -83,10 +83,10 @@ def success(request, reference):
     )
 
     discord_links = {
-        'Introduction to Software Engineering': 'https://discord.gg/r4qQXvXY',
-        'Frontend Web Development(REACT)': 'https://discord.gg/RZcNcF8Q',
-        'Backend Web Development (Python)': 'https://discord.gg/yrd4NYAD',
-        'Backend Web Development (Node.js)': 'https://discord.gg/sSec7TKZ'
+        'Introduction to Software Engineering': 'https://discord.gg/ErMetwCGCp',
+        'Frontend Web Development(REACT)': 'https://discord.gg/enUeQUFxYY',
+        'Backend Web Development (Python)': 'https://discord.gg/J2Knnm6fXH',
+        'Backend Web Development (Node.js)': 'https://discord.gg/2SnKbqdR2e'
     }
 
     discord = discord_links.get(payment.course)
